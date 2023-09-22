@@ -6,7 +6,6 @@ exports.getTourService = async (quires) => {
     const tours = await Tours.find({}, quires.field).sort(quires.sort).skip(quires.skip).limit(quires.limit)
     const totalTours = await Tours.countDocuments()
     const totalPage = Math.ceil(totalTours / quires.limit)
-    console.log({ totalPage });
     return { totalPage, tours }
 }
 
@@ -28,22 +27,22 @@ exports.getSingleTourService = async (id) => {
 // UPDATE TOUR
 
 exports.updateSingleTourService = async (id, body) => {
-    const existTour =await existTourById(id)
+    const existTour = await existTourById(id)
     console.log(existTour);
     if (existTour) {
         const result = await existTour.set(body).save()
         return result
-    }    
+    }
 }
 
 // GET TRENDING TOUR
 exports.trendingTourService = async () => {
-  const trendingTour=await Tours.find({}).sort({viewCount:-1}).limit(3)
-  return trendingTour 
+    const trendingTour = await Tours.find({}).sort({ viewCount: -1 }).limit(3)
+    return trendingTour
 }
 
 // GET cheapest TOUR
 exports.cheapestTourService = async () => {
-    const trendingTour=await Tours.find({}).sort({viewCount:1}).limit(3)
-    return trendingTour 
-  }
+    const trendingTour = await Tours.find({}).sort({ viewCount: 1 }).limit(3)
+    return trendingTour
+}

@@ -14,7 +14,6 @@ exports.getAllTour = async (req, res) => {
         if (req.query.sort) {
             const sort = req.query.sort
             quires.sort = sort
-            console.log(sort);
         }
 
         if (req.query.page) {
@@ -22,7 +21,6 @@ exports.getAllTour = async (req, res) => {
             let skip = (page - 1) * limit
             quires.skip = skip
             quires.limit = parseInt(limit)
-            console.log('limit', limit);
         }
 
         const result = await getTourService(quires)
